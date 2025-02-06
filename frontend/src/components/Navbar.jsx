@@ -7,7 +7,7 @@ const Navbar = () => {
         px-10 py-2 w-auto text-custom-white bg-custom-slate bg-gradient-to-l from-custom-white to-custom-slate">
             <div className="flex gap-[4.5rem]">
                 <div className="flex items-center gap-2">
-                    <img src={logo} className="w-11" />
+                    <img src={logo} className="w-8" />
                     <span className="text-xl font-bold">Up Watch</span>
                 </div>
                 <div className="flex gap-12 items-center">

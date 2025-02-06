@@ -18,6 +18,7 @@ export default {
 				"custom-skyblue": "#a8dadc",
 				"custom-white": "#f1faee",
 				"custom-red": "#e63946",
+				"custom-bg": "#788b9b",
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				card: {
