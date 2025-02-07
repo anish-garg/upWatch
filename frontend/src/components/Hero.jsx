@@ -9,10 +9,10 @@ export default function Hero() {
                 aria-hidden="true"
             >
                 <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] animate-gradient-slow">
-                    <div className="absolute inset-0 bg-gradient-to-r from-custom-white via-primary/30 to-custom-slate opacity-90 blur-3xl animate-rotate-slow rounded-full" />
-                    <div className="absolute inset-0 bg-gradient-to-l from-custom-white via-secondary/30 to-custom-slate opacity-50 blur-2xl animate-rotate-reverse rounded-full" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-custom-white via-secondary/30 to-custom-slate opacity-50 blur-2xl animate-rotate-reverse rounded-full" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-custom-white via-secondary/30 to-custom-slate opacity-90 blur-2xl animate-rotate-reverse rounded-full" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-custom-slate via-primary/30 to-custom-white opacity-90 blur-3xl animate-rotate-slow rounded-full" />
+                    <div className="absolute inset-0 bg-gradient-to-l from-custom-slate via-secondary/30 to-custom-white opacity-50 blur-2xl animate-rotate-reverse rounded-full" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-custom-slate via-secondary/30 to-custom-white opacity-50 blur-2xl animate-rotate-reverse rounded-full" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-custom-slate via-secondary/30 to-custom-white opacity-90 blur-2xl animate-rotate-reverse rounded-full" />
                 </div>
             </div>
             <div className="relative z-10">

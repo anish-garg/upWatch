@@ -10,7 +10,7 @@ import {
 const Services = () => {
     return (
         <div className="mt-24">
-            <span className="text-2xl font-bold text-white">UpWatch Monitoring</span>
+            <span className="text-2xl font-bold flex justify-center">UpWatch Monitoring</span>
             <div className="flex justify-center mt-5">
                 <Carousel className="w-[90%] max-w-none">
                     <CarouselContent className="-ml-1">
