@@ -17,7 +17,7 @@ const Services = () => {
                         {Array.from({ length: 5 }).map((_, index) => (
                             <CarouselItem key={index} className="pl-1 md:basis-1/2 lg:basis-1/3">
                                 <div className="p-1">
-                                    <Card>
+                                    <Card className="rounded-xl border bg-card text-card-foreground shadow">
                                         <CardContent className="flex aspect-video items-center justify-center p-6">
                                             <span className="text-2xl font-semibold">{index + 1}</span>
                                         </CardContent>

@@ -1,5 +1,6 @@
 import logo from "../assets/output-onlinepngtools.png"
-import { Linkedin, Instagram, Github, Twitter } from "lucide-react"
+import { Linkedin, Instagram, Github, Twitter, Contact } from "lucide-react"
+import ContactUs from "./ContactUs";
 
 const sections = [
     {
@@ -33,7 +34,7 @@ const sections = [
 
 const Footer = () => {
     return (
-        <section className="py-6 mx-10">
+        <section className="py-6 mx-4">
             <div className="mt-20 flex flex-col justify-between gap-4 border-t pt-8 text-center text-sm font-medium text-muted-foreground lg:flex-row lg:items-center lg:text-left"></div>
             <div className="container">
                 <footer>
@@ -76,6 +77,7 @@ const Footer = () => {
                                 </li>
                             </ul>
                         </div>
+                        <ContactUs />
                         <div className="grid grid-cols-3 gap-6 lg:gap-20">
                             {sections.map((section, sectionIdx) => (
                                 <div key={sectionIdx}>
@@ -94,7 +96,7 @@ const Footer = () => {
                             ))}
                         </div>
                     </div>
-                    <div className="mt-20 flex flex-col justify-between gap-4 border-t pt-8 text-center text-sm font-medium text-muted-foreground lg:flex-row lg:items-center lg:text-left">
+                    <div className="mt flex flex-col justify-between gap-4 border-t pt-8 text-center text-sm font-medium text-muted-foreground lg:flex-row lg:items-center lg:text-left">
                         <p>© 2025 Up Watch. All rights reserved.</p>
                         <ul className="flex justify-center gap-4 lg:justify-start">
                             <li className="hover:text-primary">

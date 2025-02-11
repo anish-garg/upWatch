@@ -3,6 +3,7 @@ import Footer from './components/Footer'
 import Hero from './components/Hero'
 import Navbar from './components/Navbar'
 import Services from './components/Services'
+import ContactUs from './components/ContactUs'
 import Values from './components/Values'
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Hero />
       <Services />
       <Values />
+      {/* <ContactUs /> */}
       <Footer />
     </>
   )
