@@ -1,5 +1,5 @@
 import logo from "../assets/output-onlinepngtools.png"
-import { Linkedin, Instagram, Github, Twitter, Contact } from "lucide-react"
+import { Linkedin, Instagram, Github, Twitter } from "lucide-react"
 import ContactUs from "./ContactUs";
 
 const sections = [
