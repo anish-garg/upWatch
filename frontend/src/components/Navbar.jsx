@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import logo from '../assets/output-onlinepngtools.png'
+import { NavLink } from "react-router"
 
 const Navbar = () => {
     return (
@@ -18,7 +19,7 @@ const Navbar = () => {
                 </div>
             </div>
             <div className="flex gap-6">
-                <Button className="">Sign in</Button>
+                <Button>Sign in</Button>
                 <Button variant="secondary">Sign up</Button>
             </div>
         </nav>
