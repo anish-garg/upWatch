@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 dotenv.config();
 import cors from 'cors';
+import cron from 'node-cron';
+import axios from 'axios';
 import { userRoute } from './Routes/userRoute.js';
 
 const app = express();
@@ -32,6 +34,25 @@ app.use(cors());
 // }
 
 // testMongoDBConnection();
+
+// Runs every 3 minutes
+async function test() {
+    try {
+        cron.schedule('*/3 * * * *', async () => {
+            try {
+                const response = await axios.get('https://github.com');
+                console.log('Site is up:', response.status === 200);
+            } catch (error) {
+                console.log('Site is down');
+            }
+        });
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+test();
 
 app.listen(port, () => {
     console.log(`Server is running on PORT ${port}`)
