@@ -22,6 +22,7 @@ export const createUser = asyncHandler(async (req, res) => {
 
 export const monitorSite = asyncHandler(async (req, res) => {
     try {
+        // Start the cron job when this function is called
         cron.schedule('*/1 * * * *', async () => {
             console.log("Running the cron job to monitor sites...");
             try {
@@ -30,9 +31,9 @@ export const monitorSite = asyncHandler(async (req, res) => {
                     user.sites.forEach(async (url) => {
                         try {
                             const response = await axios.get(url);
-                            res.send(response.status === 200).send('Site is up');
+                            console.log(`${url} is up, Status: ${response.status}`);
                         } catch (error) {
-                            res.send('Site is down');
+                            console.log(`${url} is down`);
                         }
                     })
                 })
@@ -41,7 +42,8 @@ export const monitorSite = asyncHandler(async (req, res) => {
                 console.log('Error fetching sites:', error);
             }
         });
-        res.status(200).send('Cron job started to monitor sites every minute');
+        // Send only one response when the API is called
+        res.send('Cron job started to monitor sites every minute');
     }
     catch (error) {
         console.log(error);
