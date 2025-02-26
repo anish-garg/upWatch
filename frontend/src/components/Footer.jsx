@@ -34,8 +34,8 @@ const sections = [
 
 const Footer = () => {
     return (
-        <section className="py-6 mx-4">
-            <div className="mt-20 flex flex-col justify-between gap-4 border-t pt-8 text-center text-sm font-medium text-muted-foreground lg:flex-row lg:items-center lg:text-left"></div>
+        <section className="mx-4">
+            <div className="mt-20 flex flex-col justify-between gap-4 border-t text-center text-sm font-medium text-muted-foreground lg:flex-row lg:items-center lg:text-left"></div>
             <div className="container">
                 <footer>
                     <div className="flex flex-col items-center justify-between gap-10 text-center lg:flex-row lg:text-left">
@@ -96,7 +96,7 @@ const Footer = () => {
                             ))}
                         </div>
                     </div>
-                    <div className="mt flex flex-col justify-between gap-4 border-t pt-8 text-center text-sm font-medium text-muted-foreground lg:flex-row lg:items-center lg:text-left">
+                    <div className="flex flex-col justify-between gap-4 border-t py-4 text-center text-sm font-medium text-muted-foreground lg:flex-row lg:items-center lg:text-left">
                         <p>© 2025 Up Watch. All rights reserved.</p>
                         <ul className="flex justify-center gap-4 lg:justify-start">
                             <li className="hover:text-primary">

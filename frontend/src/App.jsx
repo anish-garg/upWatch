@@ -1,21 +1,21 @@
+import Layout from './components/Layout'
 import './App.css'
-import Footer from './components/Footer'
-import Hero from './components/Hero'
-import Navbar from './components/Navbar'
-import Services from './components/Services'
-import ContactUs from './components/ContactUs'
-import Values from './components/Values'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Website from './pages/Website'
+import Monitoring from './pages/Monitoring'
 
 function App() {
 
   return (
     <>
-      <Navbar />
-      <Hero />
-      <Services />
-      <Values />
-      {/* <ContactUs /> */}
-      <Footer />
+      <Router>
+        <Routes>
+          <Route element={<Layout />} >
+            <Route path='/' element={<Website />} />
+            <Route path='/monitoring' element={<Monitoring />} />
+          </Route>
+        </Routes>
+      </Router>
     </>
   )
 }

@@ -56,7 +56,7 @@ export default function ContactUs() {
 
     return (
         <div className="flex min-h-[60vh] h-full items-center justify-center px-4">
-            <Card className="w-[33rem] h-[25rem]">
+            <Card className="w-[33rem] h-[23rem]">
                 <CardHeader>
                     <CardTitle className="text-2xl">Contact Us</CardTitle>
                     <CardDescription>

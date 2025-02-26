@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import logo from '../assets/output-onlinepngtools.png'
-import { NavLink } from "react-router"
+// import { NavLink } from "react-router-dom"
 
 const Navbar = () => {
     return (
@@ -12,8 +12,8 @@ const Navbar = () => {
                     <span className="text-xl font-bold">Up Watch</span>
                 </div>
                 <div className="flex gap-12 items-center">
-                    <span>Home</span>
-                    <span>Monitoring</span>
+                    <a href="/">Home</a>
+                    <a href="/monitoring">Monitoring</a>
                     <span>Pricing</span>
                     <span>Documentation</span>
                 </div>
