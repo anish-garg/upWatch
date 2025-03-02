@@ -10,16 +10,13 @@ datasource db {
 model User {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
   email    String    @unique
-  monitors Monitor[]  
+  monitors Monitor[]
 }
 
 model Monitor {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  url     String
-  userId  String @db.ObjectId  
-  user    User   @relation(fields: [userId], references: [id])
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  url    String
+  userId String @db.ObjectId
+  status String @default("unknown")
+  user   User   @relation(fields: [userId], references: [id])
 }
-
-
-
-

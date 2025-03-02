@@ -22,21 +22,61 @@ cron.schedule("*/1 * * * *", async () => {
     console.log("Running the cron job to monitor sites...");
     try {
         const users = await prisma.user.findMany({
-            include: { monitors: true } // Fetch associated monitors
+            include: { monitors: true }
         });
 
         for (const user of users) {
             for (const monitor of user.monitors) {
                 try {
                     const response = await axios.get(monitor.url);
-                    console.log(`${monitor.url} is up, Status: ${response.status}`);
+                    // console.log(response.status);
+                    if (response.status === 200) {
+                        await prisma.monitor.update({
+                            where: { id: monitor.id },
+                            data: { status: "Up" }
+                        });
+                    } else {
+                        await prisma.monitor.update({
+                            where: { id: monitor.id },
+                            data: { status: "Down" }
+                        });
+                    }
+                    // console.log(`${monitor.url} is up, Status: ${response.status}`);
                 } catch (error) {
-                    console.log(`${monitor.url} is down`);
+                    console.log(error);
                 }
             }
         }
     } catch (error) {
         console.error("Error fetching sites:", error);
+    }
+});
+
+export const monitorSite = asyncHandler(async (req, res) => {
+    let { id } = req.params;
+    try {
+        const user = await prisma.user.findUnique({
+            where: { id: id },
+            include: { monitors: true }
+        });
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        if (!user.monitors || user.monitors.length === 0) {
+            return res.status(404).json({ message: "No monitors found for this user" });
+        }
+
+        for (const monitor of user.monitors) {
+            console.log(monitor.status);
+        }
+
+        res.json({ monitors: user.monitors });
+
+    } catch (error) {
+        console.error("Error fetching user monitors:", error);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 });
 
