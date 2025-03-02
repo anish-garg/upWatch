@@ -12,8 +12,8 @@ function App() {
         <Routes>
           <Route element={<Layout />} >
             <Route path='/' element={<Website />} />
-            <Route path='/monitoring' element={<Monitoring />} />
           </Route>
+          <Route path='/monitoring' element={<Monitoring />} />
         </Routes>
       </Router>
     </>
