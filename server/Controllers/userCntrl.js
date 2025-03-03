@@ -81,12 +81,12 @@ export const monitorSite = asyncHandler(async (req, res) => {
 });
 
 export const createMonitor = asyncHandler(async (req, res) => {
-    const { id } = req.params;  // User ID from URL
+    const { id } = req.params; 
     try {
         const monitor = await prisma.monitor.create({
             data: {
                 ...req.body,
-                userId: id, // Assuming your Monitor model has a userId field
+                userId: id, 
             },
         });
 
