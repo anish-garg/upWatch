@@ -4,13 +4,14 @@ import {
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
+  // SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import logo from "../assets/Screenshot_2025-02-03_005651-removebg-preview.png"
 
 const data = {
   title: "Uptime",
@@ -41,24 +42,23 @@ export function AppSidebar({ ...props }) {
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-        {/* Add header content if needed */}
+        <a href="/">
+          <div className="flex gap-3 items-center">
+            <img className="w-8" src={logo} alt="logo" />
+            <span className="text-2xl font-bold text-custom-slate">Up Watch</span>
+          </div>
+        </a>
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup className="tw-text-2xl" key={data.title}>
-          <SidebarGroupLabel className="tw-font-bold tw-text-xl tw-text-primary">
-            {data.title}
-          </SidebarGroupLabel>
+        <SidebarGroup className="text-2xl" key={data.title}>
+          {/* <SidebarGroupLabel>{data.title}</SidebarGroupLabel> */}
           <SidebarGroupContent>
             <SidebarMenu>
-              {data.items.map((item, index) => {
+              {data.items.map((item) => {
                 const isActive = location.pathname === item.url;
                 return (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton
-                      asChild
-                      isActive={isActive}
-                      className={index === 0 ? "tw-font-extrabold tw-text-lg" : ""}
-                    >
+                    <SidebarMenuButton asChild isActive={isActive}>
                       <a href={item.url || "#"}>{item.title}</a>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
