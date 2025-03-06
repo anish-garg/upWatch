@@ -19,7 +19,7 @@ const Navbar = () => {
                 </div>
             </div>
             <div className="flex gap-6">
-                <Button>Sign in</Button>
+                <a href="/register"><Button>Sign in</Button></a>
                 <Button variant="secondary">Sign up</Button>
             </div>
         </nav>

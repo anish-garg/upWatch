@@ -4,16 +4,13 @@ export const api = axios.create({
     baseURL: "http://localhost:8000/api/user"
 })
 
-export const createUser = async () => {
+export const createUser = async (formData) => {
     try {
-        const response = await api.post("/register");
-        if (response.status === 400 || response.status === 500) {
-            throw response.data;
-        }
+        const response = await api.post("/register", formData);
         return response.data;
     } catch (error) {
-        console.log(error);
-        throw error
+        console.error("API Error:", error.response?.data || error.message);
+        throw error.response?.data || error.message;
     }
 };
 
