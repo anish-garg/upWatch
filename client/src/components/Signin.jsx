@@ -24,14 +24,14 @@ const Signin = () => {
     };
 
     return (
-        <div className="flex justify-center">
+        <div className="h-screen flex items-center bg-custom-slate">
             <Card className="mx-auto max-w-sm">
                 <CardHeader className="space-y-1">
-                    <CardTitle className="text-2xl font-bold">Login</CardTitle>
-                    <CardDescription>Enter your email and password to login to your account</CardDescription>
+                    <CardTitle className="text-2xl font-bold">Sign in</CardTitle>
+                    <CardDescription>Enter email and password to sign in to your accound</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <form onSubmit={handleSubmit}> {/* Fix here */}
+                    <form onSubmit={handleSubmit}>
                         <div className="space-y-4">
                             <div className="space-y-2">
                                 <Label htmlFor="email">Email</Label>
@@ -41,8 +41,9 @@ const Signin = () => {
                                 <Label htmlFor="password">Password</Label>
                                 <Input onChange={handleChange} name="password" id="password" type="password" required /> {/* Fix here */}
                             </div>
+                            <div>Click here to<a href="/register" className=""> Sign up </a></div>
                             <Button type="submit" className="w-full">
-                                Login
+                                Sign in
                             </Button>
                         </div>
                     </form>
