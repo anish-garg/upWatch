@@ -1,15 +1,20 @@
 import { prisma } from "../config/prismaConfig.js"
 import cron from 'node-cron';
 import axios from 'axios';
+import bcrypt from 'bcryptjs'
 import asyncHandler from 'express-async-handler'
 
 export const createUser = asyncHandler(async (req, res) => {
-    let { email } = req.body;
+    let { email, password } = req.body;
     console.log(email);
-    const userExists = await prisma.user.findUnique({ where: { email: email } });
+    const userExists = await prisma.user.findUnique({ where: { email } });
     if (!userExists) {
+        const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = await prisma.user.create({
-            data: req.body
+            data: {
+                email,
+                password: hashedPassword || undefined
+            }
         });
         res.send({
             message: "User registered successfully",
@@ -22,7 +27,7 @@ cron.schedule("*/1 * * * *", async () => {
     console.log("Running the cron job to monitor sites...");
     try {
         const users = await prisma.user.findMany({
-            include: { monitors: true }
+            select: { id: true, email: true, monitors: true }
         });
 
         for (const user of users) {
@@ -81,12 +86,12 @@ export const monitorSite = asyncHandler(async (req, res) => {
 });
 
 export const createMonitor = asyncHandler(async (req, res) => {
-    const { id } = req.params; 
+    const { id } = req.params;
     try {
         const monitor = await prisma.monitor.create({
             data: {
                 ...req.body,
-                userId: id, 
+                userId: id,
             },
         });
 
@@ -97,3 +102,27 @@ export const createMonitor = asyncHandler(async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+export const userSignin = asyncHandler(async (req, res) => {
+    let { email, password } = req.body;
+    try {
+        const userExists = await prisma.user.findUnique({ where: { email } });
+        if (userExists) {
+            const isPasswordValid = await bcrypt.compare(password, userExists.password);
+            // console.log("Hashed Password: ", userExists.password);
+            // console.log("Password: ", password);
+            // console.log(isPasswordValid);
+            if (!isPasswordValid) {
+                return res.status(401).json({ message: "Invalid email or password" });
+            } else {
+                res.json({
+                    message: "Login successful",
+                });
+            }
+        } else {
+            return res.status(401).json({ message: "Invalid email or password" });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+})
