@@ -3,23 +3,29 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { createUser } from "@/utilities/api"
+import { createUser, userSignin } from "@/utilities/api"
 import { useState } from "react"
+import { useNavigate } from "react-router"
 
 const Signin = () => {
-    const [formData, setFormData] = useState({ email: "", password: "" });
-
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         try {
-            const data = await createUser(formData);
-            // console.log("User signed in:", data);
+            const data = await userSignin(email, password);
+
+            // if (data.token) {
+            //     localStorage.setItem("authToken", data.token);
+            // }
+
+            console.log("Login successful!", data);
+            navigate("/");
         } catch (error) {
-            console.log(error);
+            console.log("Login failed!", error)
         }
     };
 
@@ -28,18 +34,18 @@ const Signin = () => {
             <Card className="mx-auto max-w-sm">
                 <CardHeader className="space-y-1">
                     <CardTitle className="text-2xl font-bold">Sign in</CardTitle>
-                    <CardDescription>Enter email and password to sign in to your accound</CardDescription>
+                    <CardDescription>Enter email and password to sign in to your account</CardDescription>
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={handleSubmit}>
                         <div className="space-y-4">
                             <div className="space-y-2">
                                 <Label htmlFor="email">Email</Label>
-                                <Input onChange={handleChange} name="email" id="email" type="email" placeholder="m@example.com" required /> {/* Fix here */}
+                                <Input value={email} onChange={(e) => setEmail(e.target.value)} name="email" id="email" type="email" placeholder="m@example.com" required />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="password">Password</Label>
-                                <Input onChange={handleChange} name="password" id="password" type="password" required /> {/* Fix here */}
+                                <Input value={password} onChange={(e) => setPassword(e.target.value)} name="password" id="password" type="password" required />
                             </div>
                             <div>Click here to<a href="/register" className=""> Sign up </a></div>
                             <Button type="submit" className="w-full">

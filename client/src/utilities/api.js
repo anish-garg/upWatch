@@ -39,3 +39,18 @@ export const createMonitor = async (id) => {
         throw error;
     }
 };
+
+export const userSignin = async (email, password) => {
+    try {
+        // No need of using json stringify because in axios like library response is already parsed in json
+        const response = await api.post("/login", {
+            email,
+            password
+        });
+
+        return response;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+};

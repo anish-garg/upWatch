@@ -120,9 +120,13 @@ export const userSignin = asyncHandler(async (req, res) => {
                 });
             }
         } else {
-            return res.status(401).json({ message: "Invalid email or password" });
+            return res.status(402).json({ message: "Invalid email or password" });
         }
     } catch (error) {
         console.log(error);
     }
 })
+
+
+
+
