@@ -48,6 +48,21 @@ export const userSignin = async (email, password) => {
             password
         });
 
+        const { token, user } = response;
+
+        // Store the token in localStorage for future authenticated requests
+        if (token) {
+            localStorage.setItem("authToken", token);
+
+            // Configure default Authorization header for all future requests
+            api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        }
+
+        // Store user data if available
+        if (user) {
+            localStorage.setItem("userData", JSON.stringify(user));
+        }
+
         return response;
     } catch (error) {
         console.log(error);

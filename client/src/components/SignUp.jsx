@@ -5,9 +5,12 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { createUser } from "@/utilities/api"
 import { useState } from "react"
+import { useNavigate } from "react-router"
 
 const Signup = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
+    const navigate = useNavigate();
+
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,6 +21,7 @@ const Signup = () => {
         try {
             const data = await createUser(formData);
             // console.log("User signed in:", data);
+            navigate("/")
         } catch (error) {
             console.log(error);
         }

@@ -1,26 +1,41 @@
 import { prisma } from "../config/prismaConfig.js"
 import cron from 'node-cron';
 import axios from 'axios';
-import bcrypt from 'bcryptjs'
-import asyncHandler from 'express-async-handler'
+import bcrypt from 'bcryptjs';
+import asyncHandler from 'express-async-handler';
+import jwt from 'jsonwebtoken';
 
 export const createUser = asyncHandler(async (req, res) => {
-    let { email, password } = req.body;
-    console.log(email);
-    const userExists = await prisma.user.findUnique({ where: { email } });
-    if (!userExists) {
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = await prisma.user.create({
-            data: {
-                email,
-                password: hashedPassword || undefined
-            }
-        });
-        res.send({
-            message: "User registered successfully",
-            user: newUser,
-        });
-    } else res.status(201).send({ message: "User already registered" })
+    try {
+
+        let { email, password } = req.body;
+        console.log(email);
+        const userExists = await prisma.user.findUnique({ where: { email } });
+        if (!userExists) {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            const newUser = await prisma.user.create({
+                data: {
+                    email,
+                    password: hashedPassword || undefined
+                }
+            });
+            const token = jwt.sign(
+                { id: newUser.id, email },
+                process.env.jwtSecret,
+                {
+                    expiresIn: "24h"
+                }
+            );
+            console.log(token);
+            res.send({
+                message: "User registered successfully",
+                user: newUser,
+                token
+            });
+        } else res.status(201).send({ message: "User already registered" })
+    } catch (error) {
+        console.log(error);
+    }
 })
 
 cron.schedule("*/1 * * * *", async () => {
@@ -115,8 +130,18 @@ export const userSignin = asyncHandler(async (req, res) => {
             if (!isPasswordValid) {
                 return res.status(401).json({ message: "Invalid email or password" });
             } else {
+                const token = jwt.sign(
+                    { id: userExists.id },
+                    process.env.jwtSecret,
+                    {
+                        expiresIn: "24h"
+                    }
+                );
+                console.log(token);
                 res.json({
                     message: "Login successful",
+                    userExists,
+                    token
                 });
             }
         } else {

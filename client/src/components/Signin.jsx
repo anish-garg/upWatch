@@ -18,9 +18,9 @@ const Signin = () => {
         try {
             const data = await userSignin(email, password);
 
-            // if (data.token) {
-            //     localStorage.setItem("authToken", data.token);
-            // }
+            if (data.token) {
+                localStorage.setItem("authToken", data.token);
+            }
 
             console.log("Login successful!", data);
             navigate("/");
