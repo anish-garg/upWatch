@@ -1,9 +1,8 @@
-/* eslint-disable no-unused-vars */
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { createUser, userSignin } from "@/utilities/api"
+import { userSignin } from "@/utilities/api"
 import { useState } from "react"
 import { useNavigate } from "react-router"
 
@@ -22,7 +21,7 @@ const Signin = () => {
                 localStorage.setItem("authToken", data.token);
             }
 
-            console.log("Login successful!", data);
+            // console.log("Login successful!", data);
             navigate("/");
         } catch (error) {
             console.log("Login failed!", error)

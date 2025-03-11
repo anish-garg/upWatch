@@ -7,7 +7,7 @@ export const api = axios.create({
 export const createUser = async (formData) => {
     try {
         const response = await api.post("/register", formData);
-        
+
         const { token, user } = response.data;
 
         // Store the JWT token
@@ -62,8 +62,7 @@ export const userSignin = async (email, password) => {
             email,
             password
         });
-
-        const { token, user } = response;
+        const { token, user } = response.data;
 
         // Store the token in localStorage for future authenticated requests
         if (token) {
@@ -76,6 +75,8 @@ export const userSignin = async (email, password) => {
         // Store user data if available
         if (user) {
             localStorage.setItem("userData", JSON.stringify(user));
+        } else {
+            console.warn("No user data received from login API");
         }
 
         return response;

@@ -121,17 +121,17 @@ export const createMonitor = asyncHandler(async (req, res) => {
 export const userSignin = asyncHandler(async (req, res) => {
     let { email, password } = req.body;
     try {
-        const userExists = await prisma.user.findUnique({ where: { email } });
-        if (userExists) {
-            const isPasswordValid = await bcrypt.compare(password, userExists.password);
-            // console.log("Hashed Password: ", userExists.password);
+        const user = await prisma.user.findUnique({ where: { email } });
+        if (user) {
+            const isPasswordValid = await bcrypt.compare(password, user.password);
+            // console.log("Hashed Password: ", user.password);
             // console.log("Password: ", password);
             // console.log(isPasswordValid);
             if (!isPasswordValid) {
                 return res.status(401).json({ message: "Invalid email or password" });
             } else {
                 const token = jwt.sign(
-                    { id: userExists.id },
+                    { id: user.id },
                     process.env.jwtSecret,
                     {
                         expiresIn: "24h"
@@ -140,7 +140,7 @@ export const userSignin = asyncHandler(async (req, res) => {
                 console.log(token);
                 res.json({
                     message: "Login successful",
-                    userExists,
+                    user,
                     token
                 });
             }
