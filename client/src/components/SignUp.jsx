@@ -21,6 +21,9 @@ const Signup = () => {
         try {
             const data = await createUser(formData);
             // console.log("User signed in:", data);
+            if (data.token) {
+                localStorage.setItem("authToken", data.token);
+            }
             navigate("/")
         } catch (error) {
             console.log(error);

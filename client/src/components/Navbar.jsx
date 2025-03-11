@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import logo from '../assets/output-onlinepngtools.png'
+import Profile from "./Profile"
 // import { NavLink } from "react-router-dom"
 
 const Navbar = () => {
@@ -19,6 +20,7 @@ const Navbar = () => {
                 </div>
             </div>
             <div className="flex gap-6">
+                <Profile />
                 <a href="/login"><Button>Sign in</Button></a>
             </div>
         </nav>

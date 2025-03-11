@@ -7,6 +7,21 @@ export const api = axios.create({
 export const createUser = async (formData) => {
     try {
         const response = await api.post("/register", formData);
+        
+        const { token, user } = response.data;
+
+        // Store the JWT token
+        if (token) {
+            localStorage.setItem("authToken", token);
+
+            // Set default authorization header for future requests
+            api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        }
+
+        // Store user data for navbar display
+        if (user) {
+            localStorage.setItem("userData", JSON.stringify(user));
+        }
         return response.data;
     } catch (error) {
         console.error("API Error:", error.response?.data || error.message);
