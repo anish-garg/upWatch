@@ -22,7 +22,7 @@ const Profile = () => {
         return () => window.removeEventListener("storage", loadUser);
     }, []);
 
-    if (!user) return null; // Hide profile section if no user is logged in
+    if (!user) return null; 
 
     return (
         <div className="flex items-center gap-3">

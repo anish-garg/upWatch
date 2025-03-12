@@ -79,17 +79,13 @@ export const monitorSite = asyncHandler(async (req, res) => {
             where: { id: id },
             include: { monitors: true }
         });
-
+        // console.log(`Received id: ${user.id}`);
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
 
         if (!user.monitors || user.monitors.length === 0) {
             return res.status(404).json({ message: "No monitors found for this user" });
-        }
-
-        for (const monitor of user.monitors) {
-            console.log(monitor.status);
         }
 
         res.json({ monitors: user.monitors });

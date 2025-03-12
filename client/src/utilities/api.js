@@ -31,7 +31,8 @@ export const createUser = async (formData) => {
 
 export const monitorSite = async (id) => {
     try {
-        const response = await api.get(`/monitor/${id}`)
+        // console.log(`Api call: ${id}`);
+        const response = await api.get(`/monitoring/${id}`)
         if (response.status === 400 || response.status === 500) {
             throw response.data;
         }
