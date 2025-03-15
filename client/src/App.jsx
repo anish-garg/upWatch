@@ -5,6 +5,7 @@ import Website from './pages/Website'
 import Monitoring from './pages/Monitoring'
 import Signin from './components/Signin'
 import Signup from './components/Signup'
+import CreateMonitor from './pages/CreateMonitor'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path='/register' element={<Signup />} />
           <Route path='/login' element={<Signin />} />
           <Route path='/monitoring' element={<Monitoring />} />
+          <Route path='/monitoring/createMonitor' element={<CreateMonitor />} />
         </Routes>
       </Router>
     </>
