@@ -7,7 +7,6 @@ import Signin from './components/Signin'
 import Signup from './components/Signup'
 import CreateMonitor from './pages/CreateMonitor'
 
-
 function App() {
 
   return (
