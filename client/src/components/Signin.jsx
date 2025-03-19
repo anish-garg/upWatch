@@ -6,7 +6,7 @@ import { userSignin } from "@/utilities/api"
 import { useState } from "react"
 import { useNavigate } from "react-router"
 
-const Signin = () => {
+const SignIn = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
@@ -58,4 +58,4 @@ const Signin = () => {
     );
 };
 
-export default Signin;
+export default SignIn;

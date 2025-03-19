@@ -6,7 +6,7 @@ import { createUser } from "@/utilities/api"
 import { useState } from "react"
 import { useNavigate } from "react-router"
 
-const Signup = () => {
+const SignUp = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ const Signup = () => {
         <div className="h-screen flex items-center bg-custom-slate">
             <Card className="mx-auto max-w-sm">
                 <CardHeader className="space-y-1">
-                    <CardTitle className="text-2xl font-bold">Signup</CardTitle>
+                    <CardTitle className="text-2xl font-bold">SignUp</CardTitle>
                     <CardDescription>Enter email and password to create a new account</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -49,7 +49,7 @@ const Signup = () => {
                             </div>
                             <div>Click here to<a href="/login" className=""> Sign in </a></div>
                             <Button type="submit" className="w-full">
-                                Signup
+                                SignUp
                             </Button>
                         </div>
                     </form>
@@ -59,4 +59,4 @@ const Signup = () => {
     );
 };
 
-export default Signup;
+export default SignUp;
