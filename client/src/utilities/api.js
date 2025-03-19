@@ -43,9 +43,9 @@ export const monitorSite = async (id) => {
     }
 };
 
-export const createMonitor = async (id,url) => {
+export const createMonitor = async (id, url) => {
     try {
-        const response = await api.post(`/monitoring/${id}/createMonitor`,{
+        const response = await api.post(`/monitoring/${id}/createMonitor`, {
             url
         })
         if (response.status === 400 || response.status === 500) {

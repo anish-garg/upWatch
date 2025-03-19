@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Website from './pages/Website'
 import Monitoring from './pages/Monitoring'
 import Signin from './components/Signin'
-import Signup from './components/Signup.jsx'
+import Signup from './components/Signup'
 import CreateMonitor from './pages/CreateMonitor'
 
 
