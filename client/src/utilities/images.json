@@ -1,0 +1,27 @@
+[
+    {
+        "image": "../../public/first.jpg",
+        "title": "Image One",
+        "description": "Description for Image One"
+    },
+    {
+        "image": "../../public/second.jpg",
+        "title": "Image Two",
+        "description": "Description for Image Two"
+    },
+    {
+        "image": "../../public/third.png",
+        "title": "Image Three",
+        "description": "Description for Image Three"
+    },
+    {
+        "image": "../../public/fourth.jpg",
+        "title": "Image Four",
+        "description": "Description for Image Four"
+    },
+    {
+        "image": "../../public/fifth.jpg",
+        "title": "Image Five",
+        "description": "Description for Image Five"
+    }
+]
