@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({ origin: "https://up-watch-client.vercel.app", credentials: true }));
 
 app.listen(port, () => {
     console.log(`Server is running on PORT ${port}`)
