@@ -4,10 +4,35 @@ import axios from 'axios';
 import bcrypt from 'bcryptjs';
 import asyncHandler from 'express-async-handler';
 import jwt from 'jsonwebtoken';
+import nodemailer from 'nodemailer';
+
+const sendEmail = async (to, subject, text) => {
+    let transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.EMAIL_PASSWORD,
+        },
+    });
+
+    let mailOptions = {
+        from: process.env.EMAIL,
+        to,
+        subject,
+        text,
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+        console.log(`email-${to}`);
+        console.log("Email sent successfully!");
+    } catch (error) {
+        console.error("Error sending email:", error);
+    }
+};
 
 export const createUser = asyncHandler(async (req, res) => {
     try {
-
         let { email, password } = req.body;
         console.log(email);
         const userExists = await prisma.user.findUnique({ where: { email } });
@@ -61,15 +86,20 @@ cron.schedule("*/1 * * * *", async () => {
                             where: { id: monitor.id },
                             data: { status: "Down" }
                         });
+                        sendEmail(
+                            user.email,
+                            `⚠️ Your website ${monitor.url} is down!`,
+                            `Hello,\n\nYour website ${monitor.url} appears to be down. Please check and resolve the issue.\n\n- Upwatch`
+                        );
                     }
                 } catch (error) {
                     if (error.response) {
                         // Server responded with an error status (e.g., 404, 500)
                         const statusCode = error.response.status;
-                        let statusText = "Down"; 
+                        let statusText = "Down";
 
                         if (statusCode === 404) {
-                            statusText = "Not Found"; 
+                            statusText = "Not Found";
                         } else if (statusCode >= 500) {
                             statusText = "Server Error";
                         }
@@ -78,7 +108,6 @@ cron.schedule("*/1 * * * *", async () => {
                             where: { id: monitor.id },
                             data: { status: statusText }
                         });
-
                         // console.log(`${monitor.url} returned ${statusCode}, marking as ${statusText}`);
                     } else {
                         // Network error, timeout, DNS issue
@@ -86,9 +115,14 @@ cron.schedule("*/1 * * * *", async () => {
                             where: { id: monitor.id },
                             data: { status: "Unknown" }
                         });
-
                         // console.log(`${monitor.url} request failed:`, error.message);
                     }
+
+                    sendEmail(
+                        user.email,
+                        `⚠️ Your website ${monitor.url} is down!`,
+                        `Hello,\n\nYour website ${monitor.url} appears to be down. Please check and resolve the issue.\n\n- Upwatch`
+                    );
                 }
             }
         }
