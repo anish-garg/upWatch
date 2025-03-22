@@ -4,32 +4,24 @@ import axios from 'axios';
 import bcrypt from 'bcryptjs';
 import asyncHandler from 'express-async-handler';
 import jwt from 'jsonwebtoken';
-import nodemailer from 'nodemailer';
+import sgMail from '@sendgrid/mail';
 
+sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
 const sendEmail = async (to, subject, text) => {
-    let transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            user: process.env.EMAIL,
-            pass: process.env.EMAIL_PASSWORD,
-        },
-    });
-
-    let mailOptions = {
-        from: process.env.EMAIL,
+    const msg = {
         to,
+        from: process.env.EMAIL,
         subject,
         text,
-    };
+    }
 
     try {
-        await transporter.sendMail(mailOptions);
-        console.log(`email-${to}`);
+        await sgMail.send(msg);
         console.log("Email sent successfully!");
     } catch (error) {
-        console.error("Error sending email:", error);
+        console.error("Error sending email:", error.response?.body || error);
     }
-};
+}
 
 export const createUser = asyncHandler(async (req, res) => {
     try {
@@ -207,7 +199,3 @@ export const userSignin = asyncHandler(async (req, res) => {
         console.log(error);
     }
 })
-
-
-
-
