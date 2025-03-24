@@ -55,7 +55,7 @@ export const createUser = asyncHandler(async (req, res) => {
     }
 })
 
-cron.schedule("*/1 * * * *", async () => {
+cron.schedule("*/3 * * * *", async () => {
     console.log("Running the cron job to monitor sites...");
     try {
         const users = await prisma.user.findMany({
